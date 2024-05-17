@@ -2,6 +2,24 @@
   "name": "custom-react-hooks",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saurabh2k1/custom-hooks"
+  },
+  "keywords": [
+    "react-hooks",
+    "react",
+    "useFetch",
+    "useLocalStorages",
+    "useDarkMode",
+    "useLocalStorage"
+  ],
+  "author": "Saurabh Sharma <saurabh2k1@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/saurabh2k1/custom-hooks/issues"
+  },
+  "homepage": "https://github.com/saurabh2k1/custom-hooks",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -39,5 +57,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3"
   }
 }

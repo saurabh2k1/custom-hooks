@@ -5,7 +5,8 @@ import useLocalStorage from './hooks/useLocalStorage';
 import useMediaQuery from './hooks/useMediaQuery';
 import useFetch from './hooks/useFetch';
 import useToggle from './hooks/useToggle';
-import useDarkMode from './hooks/useDarkMode';
+
+import ThemeToggleButton from './components/ThemeToggleButton';
 
 interface Todos {
   id: number;
@@ -22,8 +23,6 @@ function App() {
   //using useMediaQuery hook
   const isMobile = useMediaQuery('(max-width: 768px)');
 
-  // using useDarkMode hook
-  const [darkMode, setDarkMode] = useDarkMode();
 
   // using useFetch hook
   const {data, error, loading} = useFetch<Todos[]>('https://jsonplaceholder.typicode.com/todos');
@@ -39,12 +38,12 @@ function App() {
 
 
   return (
-    <div className="App">
-      <header className="App-header">
-        
-        <h1>{isMobile ? 'Mobile View' : 'Desktop View'}</h1>
+    <div className="App dark:bg-slate-900 bg-slate-100 text-gray-900 dark:text-gray-50 " >
+      <header className=" flex flex-col items-center justify-center text-gray-900 dark:text-white ">
+        <ThemeToggleButton />
+        <h1 className='text-3xl font-bold underline text-gray-900 dark:text-gray-50'>{isMobile ? 'Mobile View' : 'Desktop View'}</h1>
         <img src={logo} className="App-logo" alt="logo" />
-        <div>
+        <div >
           <input value={name} type="text" onChange={(e) => setName(e.target.value)} />
           <p>Hello, {name}!</p>
         </div>
@@ -52,12 +51,7 @@ function App() {
           Light {isLightOn ? 'On' : 'Off'} <br/>
           <button onClick={toggleLight}>Toggle Light</button>
         </div>
-        <div>
-          Theme Mode: {darkMode ? "Dark" : "Light"} <br/>
-          <button 
-            onClick={ ()=> setDarkMode(!darkMode) }
-          >Toggle Theme</button>
-        </div>
+        
         <div>
           Fetched Data: 
           <ul>
