@@ -13,52 +13,6 @@ A custom React hook for fetching data from an API endpoint. This hook is designe
 To use the useFetch hook in your project, you can copy the useFetch.ts file into your codebase.
 
 ### Usage
-Here's an example of how to use the useFetch hook to fetch data from an API:
-```typescript	
-
-import { useEffect, useState } from "react";
-
-interface FetchResult<T> {
-    data: T | null;
-    error: any;
-    loading: boolean;
-}
-
-const useFetch = <T,>(url: string): FetchResult<T> => {
-    const [data, setData] = useState<T | null>(null);
-    const [error, setError] = useState<any>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`Error: ${response.statusText}`);
-                }
-                const json = await response.json();
-                setData(json);
-            } catch (err) {
-                setError(err);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchData();
-    }, [url]);
-
-    return {
-        data,
-        error,
-        loading,
-    };
-};
-
-export default useFetch;
-```
-
-### Example Component
 Here’s an example of how to use the useFetch hook in a React component:
 
 ```typescript
@@ -119,8 +73,6 @@ The hook returns an array containing the current value of the data and a functio
 
 Here's an example of how to use the useLocalStorage hook:
 ```typescript
-import React, { useState, useEffect } from "react";
-import useLocalStorage from "./useLocalStorage";
 
 function MyComponent() {
     const [count, setCount] = useLocalStorage("count", 0);
@@ -144,9 +96,11 @@ In this example, the useLocalStorage hook is used to store the count of clicks o
 
 ## useDarkMode
 This hook is used to configure dark mode for the theme. Currently it is configured for adding "dark" classname to the Body element of document for using with TailwindCSS.
-### Usage
 
-```tscript 
+### Usage
+Here's an example of how to use the useDarkMode hook:
+
+```typescript 
 
 function App() {
    
@@ -159,13 +113,14 @@ function App() {
            <div>
              Theme Mode: {darkMode ? "Dark" : "Light"} <br/>
              <button 
-               onClick={ ()=> setDarkMode(!darkMode) }
-             >Toggle Theme</button>
+               onClick= {()=> setDarkMode(!darkMode)}
+             >
+                Toggle Theme
+             </button>
            </div>
-         
        </div>
-     );
-   }
+    );
+}
 ```
 ## Other hooks
 
