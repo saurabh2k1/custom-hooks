@@ -38,16 +38,20 @@ function App() {
 
 
   return (
-    <div className="App dark:bg-slate-900 bg-slate-100 text-gray-900 dark:text-gray-50 " >
+    <div className="App dark:bg-slate-900 bg-slate-100 text-gray-900 dark:text-gray-50 "  
+      
+    >
       <header className=" flex flex-col items-center justify-center text-gray-900 dark:text-white ">
         <ThemeToggleButton />
         <h1 className='text-3xl font-bold underline text-gray-900 dark:text-gray-50'>{isMobile ? 'Mobile View' : 'Desktop View'}</h1>
+        <div className=' bg-indigo-200 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-gray-100' >
         <img src={logo} className="App-logo" alt="logo" />
+        </div>
         <div >
           <input value={name} type="text" onChange={(e) => setName(e.target.value)} />
           <p>Hello, {name}!</p>
         </div>
-        <div>
+        <div className='w-full'>
           Light {isLightOn ? 'On' : 'Off'} <br/>
           <button onClick={toggleLight}>Toggle Light</button>
         </div>

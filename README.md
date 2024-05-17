@@ -124,22 +124,22 @@ function App() {
 ```
 
 ## ThemeToggleButton Component
-    It is a React component called ThemeToggleButton. This component uses the useDarkMode hook to toggle the dark mode in the application. The ThemeToggleButton component renders a button that changes its appearance when the dark mode is toggled.
+It is a React component called ThemeToggleButton. This component uses the useDarkMode hook to toggle the dark mode in the application. The ThemeToggleButton component renders a button that changes its appearance when the dark mode is toggled.
 ### Usage
-    To use the ThemeToggleButton component in your application, simply import it and render it in your desired location. When the button is clicked, the dark mode will be toggled, and the application's styles will update accordingly.
+To use the ThemeToggleButton component in your application, simply import it and render it in your desired location. When the button is clicked, the dark mode will be toggled, and the application's styles will update accordingly.
 
-    ```javascript
-    import ThemeToggleButton from './components/ThemeToggleButton';
+```typescript
+import ThemeToggleButton from './components/ThemeToggleButton';
 
-    function MyComponent() {
-        return (
-            <nav>
-                <ThemeToggleButton />
-            </nav>
-        )
-    }
-    
-    ```
+function MyComponent() {
+    return (
+        <nav>
+            <ThemeToggleButton />
+        </nav>
+    )
+}
+
+```
 
 ## Other hooks
 
