@@ -6,7 +6,7 @@ interface FetchResult<T> {
     loading: boolean;
 }
 
-const useFetch = <T,>(url: string): FetchResult<T> => {
+const useFetch = <T,>(url: string, headers?: HeadersInit): FetchResult<T> => {
     const [data, setData] = useState<T | null>(null);
     const [error, setError] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(true);
@@ -14,7 +14,12 @@ const useFetch = <T,>(url: string): FetchResult<T> => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const result = await fetch(url);
+                const result = await fetch(url, {
+                    headers: headers ? new Headers(headers) : undefined,
+                });
+                if (!result.ok) {
+                    throw new Error(result.statusText);
+                }
                 const json = await result.json();
                 setData(json);
             } catch (err) {
@@ -25,7 +30,7 @@ const useFetch = <T,>(url: string): FetchResult<T> => {
         };
 
         fetchData();
-    }, [url]);
+    }, [url, headers]);
     return {
         data,
         error,

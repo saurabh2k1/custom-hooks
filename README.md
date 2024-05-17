@@ -1,4 +1,4 @@
-# Project React Custom Hooks
+# Project Custom React Hooks
 
 ## useFetch Hook
 A custom React hook for fetching data from an API endpoint. This hook is designed to handle loading, error, and data states efficiently.
@@ -119,7 +119,7 @@ The hook returns an array containing the current value of the data and a functio
 
 Here's an example of how to use the useLocalStorage hook:
 ```typescript
-	import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import useLocalStorage from "./useLocalStorage";
 
 function MyComponent() {
@@ -142,7 +142,40 @@ function MyComponent() {
 ```
 In this example, the useLocalStorage hook is used to store the count of clicks on a button. Each time the button is clicked, the incrementCount function is called, which updates the count and also updates the localStorage with the new value.
 
+## useDarkMode
+This hook is used to configure dark mode for the theme. Currently it is configured for adding "dark" classname to the Body element of document for using with TailwindCSS.
+### Usage
 
+```tscript 
+
+function App() {
+   
+     // using useDarkMode hook
+     const [darkMode, setDarkMode] = useDarkMode();
+  
+     return (
+       <div className="App">
+       
+           <div>
+             Theme Mode: {darkMode ? "Dark" : "Light"} <br/>
+             <button 
+               onClick={ ()=> setDarkMode(!darkMode) }
+             >Toggle Theme</button>
+           </div>
+         
+       </div>
+     );
+   }
+```
+## Other hooks
+
+### useMediaQuery
+
+### useToggle
+
+### useDebounce
+
+### useTitle
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.

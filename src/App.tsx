@@ -5,6 +5,7 @@ import useLocalStorage from './hooks/useLocalStorage';
 import useMediaQuery from './hooks/useMediaQuery';
 import useFetch from './hooks/useFetch';
 import useToggle from './hooks/useToggle';
+import useDarkMode from './hooks/useDarkMode';
 
 interface Todos {
   id: number;
@@ -20,6 +21,9 @@ function App() {
   
   //using useMediaQuery hook
   const isMobile = useMediaQuery('(max-width: 768px)');
+
+  // using useDarkMode hook
+  const [darkMode, setDarkMode] = useDarkMode();
 
   // using useFetch hook
   const {data, error, loading} = useFetch<Todos[]>('https://jsonplaceholder.typicode.com/todos');
@@ -37,6 +41,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        
         <h1>{isMobile ? 'Mobile View' : 'Desktop View'}</h1>
         <img src={logo} className="App-logo" alt="logo" />
         <div>
@@ -46,6 +51,12 @@ function App() {
         <div>
           Light {isLightOn ? 'On' : 'Off'} <br/>
           <button onClick={toggleLight}>Toggle Light</button>
+        </div>
+        <div>
+          Theme Mode: {darkMode ? "Dark" : "Light"} <br/>
+          <button 
+            onClick={ ()=> setDarkMode(!darkMode) }
+          >Toggle Theme</button>
         </div>
         <div>
           Fetched Data: 
