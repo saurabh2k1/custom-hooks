@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import useLocalStorage from './hooks/useLocalStorage';
@@ -8,9 +8,18 @@ import useToggle from './hooks/useToggle';
 
 import ThemeToggleButton from './components/ThemeToggleButton';
 
+import Dropdown from './components/Dropdown';
+import Pagination from './components/Pagination';
+
 interface Todos {
   id: number;
   title: string;
+}
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
 }
 
 function App() {
@@ -23,6 +32,46 @@ function App() {
   //using useMediaQuery hook
   const isMobile = useMediaQuery('(max-width: 768px)');
 
+  const [selectedCountry, setSelectedCountry] = useState<string | undefined>(undefined);
+
+  const countries = [
+    { value: 'US', label: 'United States' },
+    { value: 'CA', label: 'Canada' },
+    { value: 'UK', label: 'United Kingdom' },
+    // ... more countries
+  ];
+  const handleCountryChange = (value: string) => {
+    setSelectedCountry(value);
+  };
+
+
+  const [users, setUsers] = useState<User[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 2;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // ... your data fetching logic
+      const fetchedUsers = [
+        { id: 1, name: 'Alice', email: 'alice@example.com' },
+        { id: 2, name: 'Bob', email: 'bob@example.com' },
+        { id: 3, name: 'Charlie', email: 'charlie@example.com' },
+        // ... more users
+      ];
+      setUsers(fetchedUsers);
+    };
+
+    fetchData();
+  }, []);
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const displayedUsers = users.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   // using useFetch hook
   const {data, error, loading} = useFetch<Todos[]>('https://jsonplaceholder.typicode.com/todos');
@@ -56,14 +105,32 @@ function App() {
           <button onClick={toggleLight}>Toggle Light</button>
         </div>
         
-        <div>
+        <Dropdown 
+          options={countries} 
+          selectedValue={selectedCountry}
+          onChange={handleCountryChange}
+          placeholder='Select country'
+        />
+
+<tbody>
+          {displayedUsers.map((user) => (
+            <tr key={user.id}>
+              <td>{user.id}</td>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+            </tr>
+          ))}
+        </tbody>
+
+        <Pagination itemsPerPage={itemsPerPage} data={users} onChangePage={handlePageChange} />
+        {/* <div>
           Fetched Data: 
           <ul>
             {data?.map((todos) => (
               <li key={todos.id}>{todos.title}</li>
             ))}
           </ul>
-        </div>
+        </div> */}
       </header>
     </div>
   );
