@@ -11,6 +11,9 @@ import ThemeToggleButton from './components/ThemeToggleButton';
 import Dropdown from './components/Dropdown';
 import Pagination from './components/Pagination';
 
+import Spinner from './components/Spinner';
+
+
 interface Todos {
   id: number;
   title: string;
@@ -43,6 +46,7 @@ function App() {
   const handleCountryChange = (value: string) => {
     setSelectedCountry(value);
   };
+
 
 
   const [users, setUsers] = useState<User[]>([]);
@@ -92,10 +96,13 @@ function App() {
     >
       <header className=" flex flex-col items-center justify-center text-gray-900 dark:text-white ">
         <ThemeToggleButton />
+        
         <h1 className='text-3xl font-bold underline text-gray-900 dark:text-gray-50'>{isMobile ? 'Mobile View' : 'Desktop View'}</h1>
         <div className=' bg-indigo-200 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-gray-100' >
         <img src={logo} className="App-logo" alt="logo" />
         </div>
+        
+        <Spinner size={12}  />
         <div >
           <input value={name} type="text" onChange={(e) => setName(e.target.value)} />
           <p>Hello, {name}!</p>
@@ -111,8 +118,15 @@ function App() {
           onChange={handleCountryChange}
           placeholder='Select country'
         />
-
-<tbody>
+<table className='table'>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
           {displayedUsers.map((user) => (
             <tr key={user.id}>
               <td>{user.id}</td>
@@ -121,6 +135,8 @@ function App() {
             </tr>
           ))}
         </tbody>
+</table>
+
 
         <Pagination itemsPerPage={itemsPerPage} data={users} onChangePage={handlePageChange} />
         {/* <div>
